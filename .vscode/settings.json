@@ -2,9 +2,8 @@
   "files.exclude": {
     ".vscode": true,
     "**/.cache": true,
-    "**/*.{exe,dSYM}": true,
+    "**/*.{a,so,dylib,exe,dSYM}": true,
     "**/compile_commands.json": true,
-    "**/*.part.json": true
   },
   "files.associations": {
     "*.h": "c",
