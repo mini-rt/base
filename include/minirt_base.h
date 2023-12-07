@@ -168,12 +168,14 @@ typedef struct {
 	minirt_point *array[];
 } minirt_hit_records;
 
+typedef void (*minirt_object_dispose_v)(minirt_object *self);
 typedef minirt_err (*minirt_object_hit_records_v)(
 	minirt_object *self,
 	minirt_ray ray,
 	minirt_hit_records **out);
 
 typedef struct {
+	minirt_object_dispose_v dispose;
 	minirt_object_hit_records_v hit_records;
 } minirt_object_v;
 
@@ -184,10 +186,12 @@ struct _minirt_object {
 
 typedef struct _minirt_prng minirt_prng;
 
-typedef minirt_f (*minirt_prng_random)(minirt_prng *self);
+typedef void (*minirt_prng_dispose_v)(minirt_prng *self);
+typedef minirt_f (*minirt_prng_random_v)(minirt_prng *self);
 
 typedef struct {
-	minirt_prng_random random;
+	minirt_prng_dispose_v dispose;
+	minirt_prng_random_v random;
 } minirt_prng_v;
 
 struct _minirt_prng {
@@ -197,6 +201,7 @@ struct _minirt_prng {
 
 typedef struct _minirt_camera minirt_camera;
 
+typedef void (*minirt_camera_dispose_v)(minirt_camera *self);
 typedef minirt_err (*minirt_camera_ray_v)(
 	minirt_camera *self,
 	size_t d,
@@ -209,6 +214,7 @@ typedef minirt_err (*minirt_camera_ray_v)(
 	minirt_ray *out);
 
 typedef struct {
+	minirt_camera_dispose_v dispose;
 	minirt_camera_ray_v ray;
 } minirt_camera_v;
 
@@ -245,9 +251,11 @@ typedef struct {
 	minirt_pixel pixels[];
 } minirt_progress;
 
+typedef void (*minirt_dispose_v)(minirt *self);
 typedef void (*minirt_step_v)(minirt *self);
 
 typedef struct {
+	minirt_dispose_v dispose;
 	minirt_step_v step;
 } minirt_v;
 
