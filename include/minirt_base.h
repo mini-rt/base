@@ -172,7 +172,7 @@ typedef void (*minirt_object_dispose_v)(minirt_object *self);
 typedef minirt_err (*minirt_object_hit_records_v)(
 	minirt_object *self,
 	minirt_ray ray,
-	minirt_hit_records **out);
+	minirt_hit_records *mut);
 
 typedef struct {
 	minirt_object_dispose_v dispose;
