@@ -121,7 +121,7 @@ typedef void (*minirt_brdf_dispose_v)(minirt_brdf *self);
 typedef minirt_err (*minirt_brdf_function_v)(
 	minirt_brdf *self,
 	minirt_direction incident,
-	minirt_direction outgoing,
+	minirt_direction light_direction,
 	minirt_direction surface_normal,
 	minirt_color_hdr light_color,
 	minirt_material material,
